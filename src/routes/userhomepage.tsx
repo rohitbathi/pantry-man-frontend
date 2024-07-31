@@ -5,13 +5,15 @@ import { v4 as uuidv4 } from 'uuid'
 import Appname from "../components/Appname";
 import Itemcard from "../components/Itemcard";
 import Itemdetailsform from "../components/Itemdetailsform";
+import EditItemCard from "../components/Edititemcard";
 
 export interface Item{
+    editStatus: boolean
     itemId: string,
-    itemName: string,
-    expDate: string,
-    presentUnits: Number,
-    maxUnits: Number
+    itemName: string | undefined,
+    expDate: Date | undefined,
+    presentUnits: number | undefined,
+    maxUnits: number | undefined
 }
 
 export const genUID = ()=>{
@@ -23,42 +25,15 @@ export default function Userhome(){
 
     let [items, setItems] = useState<Item[]>([
         {
+            editStatus: false,
             itemId: genUID(),
             itemName: 'Paper rolls',
-            expDate: '12/23/2025',
+            expDate: new Date('12/23/2025'),
             presentUnits: 2,
             maxUnits: 5
-        },
-        {
-            itemId: genUID(),
-            itemName: 'Paper rolls',
-            expDate: '12/23/2025',
-            presentUnits: 2,
-            maxUnits: 5
-        },
-        {
-            itemId: genUID(),
-            itemName: 'Paper rolls',
-            expDate: '12/23/2025',
-            presentUnits: 2,
-            maxUnits: 5
-        },
-        {
-            itemId: genUID(),
-            itemName: 'Paper rolls',
-            expDate: '12/23/2025',
-            presentUnits: 2,
-            maxUnits: 5
-        },
-        {
-            itemId: genUID(),
-            itemName: 'Paper rolls',
-            expDate: '12/23/2025',
-            presentUnits: 2,
-            maxUnits: 5
-        },
+        }
     ])
-    let [itemDetails, setItemDetails] = useState<Item>()
+    let [editItem, setEditItem] = useState<Item>()
     let [showItemForm, setShowItemForm] = useState<boolean>(false)
 
     const addButtonHandler = ()=>{
@@ -83,18 +58,28 @@ export default function Userhome(){
                 !showItemForm && 
                 <div className="w-10/12 h-fit p-6 m-auto bg-slate-600 grid grid-cols-4 grid-flow-row gap-4">
                     {
-                        items.map((item)=>(
-                            <Itemcard
-                                key={item.itemId}
-                                itemId={item.itemId}
-                                itemName={item.itemName}  
-                                expDate={new Date(item.expDate)}
-                                presentUnits={item.presentUnits}
-                                maxUnits={item.maxUnits}
-                                items={items}
-                                setItems={setItems}
-                            />
-                        ))
+                        items.map((item)=>{
+                            if(!item.editStatus){
+                                return (
+                                    <Itemcard
+                                        key={item.itemId}
+                                        currItem={item}
+                                        items={items}
+                                        setItems={setItems}
+                                        setEditItem={setEditItem}
+                                    /> 
+                                )
+                            }else{
+                                return(
+                                    <EditItemCard 
+                                        key={item.itemId}
+                                        items= {items}
+                                        setItems={setItems}
+                                        editItem= {editItem}
+                                    />
+                                )
+                            }
+                        })
                     }
                 </div>
             }
@@ -102,11 +87,8 @@ export default function Userhome(){
                 showItemForm &&
                 <Itemdetailsform
                     items={items}
-                    showItemForm={showItemForm}
                     setItems={setItems}
                     setShowItemForm={setShowItemForm}
-                    itemDetails={itemDetails}
-                    setItemDetails={setItemDetails}
                 />
             }
         </div>
