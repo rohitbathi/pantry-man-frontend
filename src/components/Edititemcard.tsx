@@ -25,12 +25,12 @@ const EditItemCard = ({
                 return {
                     ...item,
                     itemName: itemNameRef.current?.value ? itemNameRef.current?.value : editItem.itemName,
-                    expDate: expDateRef.current?.value ? new Date(expDateRef.current?.value) : editItem.expDate,
+                    expDate: expDateRef.current?.value ? new Date(String(expDateRef.current?.value).replace(/-/g, '/')) : editItem.expDate,
                     presentUnits: presentUnitsRef.current?.value ? parseInt(presentUnitsRef.current?.value) : editItem.presentUnits,
                     maxUnits: maxUnitsRef.current?.value ? parseInt(maxUnitsRef.current?.value) : editItem.maxUnits,
                     editStatus: false
                 }
-                // console.log(expDateRef.current?.placeholder);
+                console.log((new Date(String(expDateRef.current?.value).replace(/-/g, '/'))))
             }
             return item
         })

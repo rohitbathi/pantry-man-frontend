@@ -18,7 +18,7 @@ export interface Item{
 
 export const genUID = ()=>{
     let uId = uuidv4()
-    return uId.slice(0,6) 
+    return uId.slice(0,6)
 }
 
 export default function Userhome(){
