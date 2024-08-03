@@ -31,9 +31,25 @@ export default function Userhome(){
             expDate: new Date('12/23/2025'),
             presentUnits: 2,
             maxUnits: 5
+        },
+        {
+            editStatus: false,
+            itemId: genUID(),
+            itemName: 'Paper rolls',
+            expDate: new Date('12/23/2025'),
+            presentUnits: 2,
+            maxUnits: 5
+        },
+        {
+            editStatus: false,
+            itemId: genUID(),
+            itemName: 'Paper rolls',
+            expDate: new Date('12/23/2025'),
+            presentUnits: 2,
+            maxUnits: 5
         }
     ])
-    let [editItem, setEditItem] = useState<Item>()
+    let [editItem, setEditItem] = useState<Item|null>(null)
     let [showItemForm, setShowItemForm] = useState<boolean>(false)
 
     const addButtonHandler = ()=>{
@@ -42,7 +58,7 @@ export default function Userhome(){
     
     return(
         <div className="page">
-            <nav className="flex w-full justify-between mb-6">
+            <nav className="flex w-full justify-between mb-6 bg-white">
                 <Appname />
                 <div className="flex justify-between items-center h-26 mr-6 mt-3 w-24">
                     <p>Logs</p>
@@ -50,13 +66,14 @@ export default function Userhome(){
                 </div>
             </nav>
             <button
+            id="addItemBtn"
             onClick={addButtonHandler}
-             className="text-5xl font-light w-16 h-16 pb-2 rounded-2xl bg-customdark ml-9 mt-9 text-white">
+            className="text-5xl font-light w-16 h-16 pb-2 rounded-2xl bg-customdark ml-9 mt-9 text-white shadow-lg shadow-gray-500">
                 +
             </button>
             {
                 !showItemForm && 
-                <div className="w-10/12 h-fit p-6 m-auto grid grid-cols-4 grid-flow-row gap-4">
+                <div className="w-fit h-fit p-6 m-auto grid grid-cols-4 grid-flow-row gap-4">
                     {
                         items.map((item)=>{
                             if(!item.editStatus){
@@ -65,6 +82,7 @@ export default function Userhome(){
                                         key={item.itemId}
                                         currItem={item}
                                         items={items}
+                                        editItem={editItem}
                                         setItems={setItems}
                                         setEditItem={setEditItem}
                                     /> 
@@ -76,6 +94,7 @@ export default function Userhome(){
                                         items= {items}
                                         setItems={setItems}
                                         editItem= {editItem}
+                                        setEditItem= {setEditItem}
                                     />
                                 )
                             }
