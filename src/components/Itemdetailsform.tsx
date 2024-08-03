@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 
-import { genUID, Item } from "../routes/userhomepage";
+import { genUID, Item } from "../pages/userhomepage";
 
 interface itemDetailsFormProps{
     items: Item[],

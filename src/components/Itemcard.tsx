@@ -1,6 +1,6 @@
 import React from "react"
 
-import { Item } from "../routes/userhomepage"
+import { Item } from "../pages/userhomepage"
 
 interface itemCardProps {
     currItem: Item
@@ -36,7 +36,6 @@ export default function Itemcard(
     return (
         <div className="w-52 h-52 p-4 bg-orange-300 flex flex-col justify-around" >
             <div>
-                <p>{currItem.itemId}</p>
                 <p><b>{currItem.itemName}</b></p>
                 <p>Expiry date: <b>{currItem.expDate?.toDateString()}</b></p>
                 <p>Units: <b>{currItem.presentUnits ? currItem.presentUnits.toString() : 0}/{currItem.maxUnits ? currItem.maxUnits.toString() : 0}</b></p>

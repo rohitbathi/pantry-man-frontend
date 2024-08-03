@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 
-import { Item } from "../routes/userhomepage";
+import { Item } from "../pages/userhomepage";
 
 interface editItemCardProps {
     items: Item[],

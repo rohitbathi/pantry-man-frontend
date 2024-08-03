@@ -1,15 +1,13 @@
 import React from 'react';
 
-// test commit
-
-import Landingpage from './routes/landingpage';
-import Userhome from './routes/userhomepage';
+import Landingpage from './pages/landingpage';
+import Userhome from './pages/userhomepage';
 
 function App() {
   return (
     <div className="App">
-      <Landingpage />
-      {/* <Userhome /> */}
+      {/* <Landingpage /> */}
+      <Userhome />
     </div>
   );
 }

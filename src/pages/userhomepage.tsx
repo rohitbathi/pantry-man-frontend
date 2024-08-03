@@ -51,12 +51,12 @@ export default function Userhome(){
             </nav>
             <button
             onClick={addButtonHandler}
-             className="text-5xl font-light w-16 h-16 border border-black rounded-full bg-orange-200 ml-7 mt-9">
+             className="text-5xl font-light w-16 h-16 pb-2 rounded-2xl bg-customdark ml-9 mt-9 text-white">
                 +
             </button>
             {
                 !showItemForm && 
-                <div className="w-10/12 h-fit p-6 m-auto bg-slate-600 grid grid-cols-4 grid-flow-row gap-4">
+                <div className="w-10/12 h-fit p-6 m-auto grid grid-cols-4 grid-flow-row gap-4">
                     {
                         items.map((item)=>{
                             if(!item.editStatus){
