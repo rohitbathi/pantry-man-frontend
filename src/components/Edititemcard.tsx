@@ -69,7 +69,7 @@ const EditItemCard = ({
                             <tr>
                                 <td>
                                     <label htmlFor="">
-                                        Max units
+                                        Maximum units
                                     </label>
                                 </td>
                                 <td>

@@ -58,7 +58,8 @@ export default function Userhome(){
     
     return(
         <div className="page">
-            <nav className="flex w-full justify-between mb-6 bg-white">
+            <nav 
+            className="flex w-full justify-between mb-6 pb-4 bg-white shadow-2xl shadow-mid pb-3">
                 <Appname />
                 <div className="flex justify-between items-center h-26 mr-6 mt-3 w-24">
                     <p>Logs</p>

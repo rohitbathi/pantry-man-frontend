@@ -1,14 +1,20 @@
 import React from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import Landingpage from './pages/landingpage';
-import Userhome from './pages/userhomepage';
+import AppLayout from './layouts/appLayout';
+import Page404 from './pages/errorpage';
+import routes from './routes';
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      element: <AppLayout />,
+      errorElement: <Page404 />,
+      children: routes
+    },
+  ])
   return (
-    <div className="App">
-      {/* <Landingpage /> */}
-      <Userhome />
-    </div>
+    <RouterProvider router={router} />
   );
 }
 

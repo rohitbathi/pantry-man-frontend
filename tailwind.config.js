@@ -16,13 +16,13 @@ module.exports = {
         poppins: ['poppins', 'sans-serif']
       },
       keyframes:{
-        lout: {
+        slideout: {
           '0%': {transform:'translateX(0)'},
           '100%': {transform:'translateX(-100%) '}
         }
       },
       animation:{
-        lout: 'lout 1s ease-out forwards 1s'
+        slideout: 'slideout 1s ease-out forwards 1s'
       }
     },
   },

@@ -17,7 +17,8 @@ export default function Landingpage(){
 
     return (
         <div className="page">
-            <nav className="mb-20">
+            <nav 
+            className="mb-20 shadow-2xl shadow-mid pb-3">
                 <Appname />
             </nav>
             <div id="reg-wrapper"
