@@ -39,7 +39,7 @@ const Itemdetailsform= (
 
     return(
         <form action="#"
-         className="max-w-[42%] m-auto p-6 border-2 border-customdark rounded-lg font-poppins">
+         className="max-w-[42%] m-auto p-6 border-2 border-customdark rounded-lg font-poppins flex flex-col justify-around">
             <input type="text" name="item-name" id="item-name" placeholder="Item name" ref={itemNameRef}
             className="w-2/3 p-2 mb-7 border border-customdark rounded-md text-lg"/>
             <table

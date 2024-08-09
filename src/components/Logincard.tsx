@@ -1,24 +1,52 @@
 import React, {useRef} from "react";
+import { useNavigate } from "react-router-dom";
 
 import { userAuth } from "../services/userAuth";
-import { useNavigate } from "react-router-dom";
+
+import { isUsernameValid } from "../utils/validation";
+
+import { useError } from "../layouts/AppLayout";
+import { genUID } from "../pages/userhomepage";
 
 export default function Logincard(){
 
     let loginUsernameRef = useRef<HTMLInputElement>(null)
     let loginPassRef = useRef<HTMLInputElement>(null)
+    let {errors, setErrors} = useError()
     let navigate = useNavigate()
 
     const loginHandler = () => {
 
-        let res = userAuth(
-            loginUsernameRef.current?.value || '',
-            loginPassRef.current?.value || ''
-        )
+        const username = loginUsernameRef.current?.value
+        const password = loginPassRef.current?.value
 
-        if(res.result){
+        let res = null
+
+        if(isUsernameValid(username).res){
+            res = userAuth(
+                username || '',
+                password || ''
+            )
+        }else{
+            setErrors([
+                ...(errors||[]),
+                {
+                    errorId:genUID(), 
+                    error:isUsernameValid(username).msg
+                }
+            ])
+        }
+
+        if(res?.result){
             navigate('/home')
         }else{
+            setErrors([
+                ...(errors||[]),
+                {
+                    errorId:genUID(), 
+                    error:res?.message
+                }
+            ])
             navigate('/')
         }
 

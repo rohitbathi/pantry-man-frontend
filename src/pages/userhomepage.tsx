@@ -53,13 +53,17 @@ export default function Userhome(){
     let [showItemForm, setShowItemForm] = useState<boolean>(false)
 
     const addButtonHandler = ()=>{
-        setShowItemForm(true)
+        if(showItemForm){
+            setShowItemForm(false)
+        }else{
+            setShowItemForm(true)
+        }
     }
     
     return(
         <div className="page">
             <nav 
-            className="flex w-full justify-between mb-6 pb-4 bg-white shadow-2xl shadow-mid pb-3">
+            className="flex w-full justify-between mb-6 pb-4 bg-white shadow-2xl shadow-mid ">
                 <Appname />
                 <div className="flex justify-between items-center h-26 mr-6 mt-3 w-24">
                     <p>Logs</p>
@@ -69,9 +73,13 @@ export default function Userhome(){
             <button
             id="addItemBtn"
             onClick={addButtonHandler}
-            className="text-5xl font-light w-16 h-16 pb-2 rounded-2xl bg-customdark ml-9 mt-9 text-white shadow-lg shadow-gray-500">
-                +
-            </button>
+            className={
+                showItemForm ?
+                "text-5xl font-light w-16 h-16 pb-2 rounded-2xl bg-red-600 ml-[20%] mt-9 text-white shadow-lg shadow-red-600 rotate-45"
+                :"text-5xl font-light w-16 h-16 pb-2 rounded-2xl bg-customdark ml-9 mt-9 text-white shadow-lg shadow-gray-500"
+                }>
+                    +
+                </button>
             {
                 !showItemForm && 
                 <div className="w-fit h-fit p-6 m-auto grid grid-cols-4 grid-flow-row gap-4">
