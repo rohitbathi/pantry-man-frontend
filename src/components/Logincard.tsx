@@ -5,40 +5,39 @@ import { useNavigate } from "react-router-dom";
 import { userAuth } from "../services/userAuth";
 
 //import validation utils
-import { isUsernameValid } from "../utils/validation";
+import { isUsernameValid, isPasswordValid } from "../utils/validation";
 
 // import helpers and types
 import { Error, useError } from "../layouts/AppLayout";
 import { genUID } from "../pages/userhomepage";
 
 export default function Logincard(){
-
     let loginUsernameRef = useRef<HTMLInputElement>(null)
     let loginPassRef = useRef<HTMLInputElement>(null)
-    let {errors, setErrors} = useError()
+    let {setErrors} = useError()
     let navigate = useNavigate()
 
     const loginHandler = () => {
-
         setErrors([])
         let errorList: Error[] = []
         const username = loginUsernameRef.current?.value
         const password = loginPassRef.current?.value
-
         let res = null
 
         if(isUsernameValid(username).res){
-
-            res = userAuth(
-                username || '',
-                password || ''
-            )
+            if(isPasswordValid(password)?.res){
+                res = userAuth(
+                    username || '',
+                    password || ''
+                )
+            }else{
+                errorList.push(...(isPasswordValid(password).errors||[]))
+            }
         }else{
             errorList.push({
                 errorId: genUID(),
                 error: isUsernameValid(username).msg
             })
-            console.log(errorList);
         }
 
         if(res){
