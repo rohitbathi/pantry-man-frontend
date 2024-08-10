@@ -1,11 +1,14 @@
 import React, {useRef} from "react";
 import { useNavigate } from "react-router-dom";
 
+// import backend services 
 import { userAuth } from "../services/userAuth";
 
+//import validation utils
 import { isUsernameValid } from "../utils/validation";
 
-import { useError } from "../layouts/AppLayout";
+// import helpers and types
+import { Error, useError } from "../layouts/AppLayout";
 import { genUID } from "../pages/userhomepage";
 
 export default function Logincard(){
@@ -17,39 +20,43 @@ export default function Logincard(){
 
     const loginHandler = () => {
 
+        setErrors([])
+        let errorList: Error[] = []
         const username = loginUsernameRef.current?.value
         const password = loginPassRef.current?.value
 
         let res = null
 
         if(isUsernameValid(username).res){
+
             res = userAuth(
                 username || '',
                 password || ''
             )
         }else{
-            setErrors([
-                ...(errors||[]),
-                {
-                    errorId:genUID(), 
-                    error:isUsernameValid(username).msg
-                }
-            ])
+            errorList.push({
+                errorId: genUID(),
+                error: isUsernameValid(username).msg
+            })
+            console.log(errorList);
         }
 
-        if(res?.result){
-            navigate('/home')
-        }else{
-            setErrors([
-                ...(errors||[]),
-                {
+        if(res){
+            if(res.result){
+                setErrors([])
+                navigate('/home')
+            }else{
+                errorList.push({
                     errorId:genUID(), 
-                    error:res?.message
-                }
-            ])
+                    error: res?.message
+                })
+                setErrors(errorList)
+                navigate('/')
+            }
+        }else{
+            setErrors(errorList)
             navigate('/')
         }
-
     }
 
     return (

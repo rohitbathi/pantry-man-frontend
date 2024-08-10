@@ -16,7 +16,6 @@ export const userAuth = (username: string, password: string)=>{
         }
         return {result: false, message: 'Username not found'}
     })
-    console.log(res);
     
     return res
 }

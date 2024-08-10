@@ -2,7 +2,6 @@ import React, { Suspense, useState } from "react";
 import { Outlet, useOutletContext } from "react-router-dom";
 
 import ErrorNotice from "../components/ErrorNotice";
-import { genUID } from "../pages/userhomepage";
 
 export interface Error{
     errorId: string,
